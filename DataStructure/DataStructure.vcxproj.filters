@@ -18,9 +18,12 @@
     <ClInclude Include="SeqList\SeqList.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="LinkList\LinkList.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="Test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
