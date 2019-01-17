@@ -172,5 +172,15 @@ public:
 		--size;
 		std::cout << "ͷɾ" << std::endl;
 	}
+
+	size_t Size()
+	{
+		return size;
+	}
+
+	bool Empty()
+	{
+		return 0 == size;
+	}
 };
 #endif

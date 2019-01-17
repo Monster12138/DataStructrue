@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="LinkList\LinkList.hpp" />
     <ClInclude Include="SeqList\SeqList.hpp" />
+    <ClInclude Include="Stack\Stack.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test.cpp" />

@@ -1,5 +1,6 @@
-#include "SeqList\SeqList.hpp"
-#include "LinkList\LinkList.hpp"
+//#include "SeqList\SeqList.hpp"
+//#include "LinkList\LinkList.hpp"
+#include "Stack\Stack.hpp"
 #include <my_check_mem.h>
 #include <iostream>
 using namespace std;
@@ -7,11 +8,30 @@ using namespace std;
 int main()
 {
 	atexit(memCheck);
+
+	Stack s1;
+	s1.Push(1);
+	s1.Push(2);
+	cout << s1.Top() << endl;
+	s1.Pop();
+	cout << s1.Top() << endl;
+	Stack s2(s1);
+	Stack s3;
+	s3 = s1;
+
+	cout << s3.Size() << endl;
+
+	//双向循环链表测试
+#if 0
 	LinkList l1;
 	l1.PushBack(1);
 	l1.PopBack();
 	l1.PushFront(2);
 	l1.PopFront();
+#endif
+	//*******************************
+
+	//动态数组测试
 #if 0
 	SeqList s1;
 	SeqList s2;
@@ -28,6 +48,7 @@ int main()
 	}
 	cout << s1.Size() << endl;
 #endif
+	//********************************
 	return 0;
 }
 

@@ -68,11 +68,12 @@ public:
 		std::cout << "¿½±´¹¹Ôì" << std::endl;
 	}
 
-	SeqList* operator=(SeqList s)
+	const SeqList* operator=(const SeqList& s)
 	{
+		SeqList tmpSeqList(s);
 		DataType* tmp = array;
-		array = s.array;
-		s.array = tmp;
+		array = tmpSeqList.array;
+		tmpSeqList.array = tmp;
 
 		size = s.size;
 		capacity = s.capacity;
