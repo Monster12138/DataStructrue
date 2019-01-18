@@ -173,6 +173,16 @@ public:
 		std::cout << "ͷɾ" << std::endl;
 	}
 
+	const DataType* Front()
+	{
+		return &head->next->data;
+	}
+
+	const DataType* End()
+	{
+		return &head->prev->data;
+	}
+
 	size_t Size()
 	{
 		return size;

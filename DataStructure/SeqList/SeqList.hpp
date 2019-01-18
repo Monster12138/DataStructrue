@@ -11,7 +11,7 @@
 
 typedef int DataType;
 
-const int init_size = 3;
+const int init_size = 15;
 
 class SeqList {
 private:

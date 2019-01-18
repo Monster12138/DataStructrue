@@ -8,7 +8,7 @@
 #include <iostream>
 typedef int DataType;
 
-const int init_size = 5;
+const int init_size = 15;
 
 class Stack 
 {

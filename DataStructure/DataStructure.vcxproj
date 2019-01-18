@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="LinkList\LinkList.hpp" />
+    <ClInclude Include="Queue\Queue.hpp" />
     <ClInclude Include="SeqList\SeqList.hpp" />
     <ClInclude Include="Stack\Stack.hpp" />
   </ItemGroup>
