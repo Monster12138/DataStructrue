@@ -1,7 +1,8 @@
 //#include "SeqList\SeqList.hpp"
 //#include "LinkList\LinkList.hpp"
 //#include "Stack\Stack.hpp"
-#include "Queue\Queue.hpp"
+//#include "Queue\Queue.hpp"
+#include "BSTree\BSTree.hpp"
 #include <my_check_mem.h>
 #include <iostream>
 using namespace std;
@@ -10,7 +11,21 @@ int main()
 {
 	atexit(memCheck);
 
+	MyBST bstree;
+	bstree.InsertNode(5);
+	bstree.InsertNode(3);
+	bstree.InsertNode(2);
+	bstree.InsertNode(4);
+	bstree.InsertNode(8);
+	bstree.InsertNode(7);
+	bstree.InsertNode(10);
+	bstree.InsertNode(9);
+
+	bstree.DeleteNode(8);
+
+
 	//∂”¡–≤‚ ‘
+#if 0
 	Queue q1;
 	q1.Push(1);
 	q1.Push(2);
@@ -25,6 +40,7 @@ int main()
 	Queue q3;
 	q3 = q1;
 	cout << q2.Size() << endl;
+#endif
 	//********************************
 
 	//’ª≤‚ ‘
