@@ -27,6 +27,12 @@
     <ClInclude Include="Queue\Queue.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="BSTree\BSTree.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AVLTree\AVLTree.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test.cpp">

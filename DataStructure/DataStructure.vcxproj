@@ -142,6 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AVLTree\AVLTree.hpp" />
+    <ClInclude Include="BSTree\BSTree.hpp" />
     <ClInclude Include="LinkList\LinkList.hpp" />
     <ClInclude Include="Queue\Queue.hpp" />
     <ClInclude Include="SeqList\SeqList.hpp" />

@@ -43,18 +43,19 @@ class MyBST
 public:
 	MyBST() :root(nullptr) {};
 	MyBST(const std::vector<int>&);
+	void DisCharge(BSTNode *&);
+	~MyBST();
 	void InsertNode(int v);
 	void DeleteNode(int v);
 	void DeleteNode(BSTNode *pNode);
 	BSTNode* FindByValue(int v);
 
-#if 0
 	BSTNode* GetSuccessor(int v);
 	BSTNode* GetSuccessor(BSTNode *pNode);
 
 	BSTNode* GetPredecessor(int v);
 	BSTNode* GetPredecessor(BSTNode *pNode);
-#endif
+
 	BSTNode* GetRoot() { return root; }
 private:
 	BSTNode *root;
@@ -168,53 +169,103 @@ BSTNode* MyBST::FindByValue(int v)
 }
 
 //待完成：查找一个结点的前驱或后继结点
-#if 0
+#if 1
 BSTNode* MyBST::GetSuccessor(BSTNode *pNode)
 {
 	assert(nullptr != pNode);
 
-	BSTNode *cur = pNode, *child;
-	if (cur->BothLRareNull())
+	if (pNode->right)
 	{
-		if (nullptr != cur->parent && cur == cur->parent->left)
+		BSTNode *cur = pNode->right;
+		while (cur->left)
 		{
-			return cur->parent;
+			cur = cur->left;
 		}
-		while (nullptr != cur->parent && cur == cur->parent->right)
-		{
-			cur = cur->parent;
-			if (nullptr != cur->parent && cur == cur->parent->left)
-			{
-				return cur->parent;
-			}
-		}
+		return cur;
 	}
-	else if (child = cur->LorRisNull())
+	if (pNode->parent)
 	{
-		if (child == cur->right)
-			return child;
-		else
-		{
+		BSTNode *cur = pNode->parent;
+		while (nullptr != cur->parent && cur != cur->parent->left)
 			cur = cur->parent;
-			//todo
-		}
+
+		return cur->parent;
+	}
+	else
+	{
+		return nullptr;
 	}
 }
 
 BSTNode* MyBST::GetPredecessor(BSTNode *pNode)
 {
 	assert(nullptr != pNode);
+	if (pNode->left)
+	{
+		BSTNode *cur = pNode->left;
+		while (cur->right)
+		{
+			cur = cur->right;
+		}
+		return cur;
+	}
 
+	if (pNode->parent)
+	{
+		BSTNode *cur = pNode->parent;
+		while (nullptr != cur->parent && cur != cur->parent->right)
+			cur = cur->parent;
+
+		return cur->parent;
+	}
+	else
+	{
+		return nullptr;
+	}
 }
 
 BSTNode* MyBST::GetSuccessor(int v)
 {
-
+	return GetSuccessor(FindByValue(v));
 }
 
 BSTNode* MyBST::GetPredecessor(int v)
 {
+	return GetPredecessor(FindByValue(v));
+}
 
+void MyBST::DisCharge(BSTNode *&pNode)
+{
+	if (nullptr == pNode)return;
+
+	DisCharge(pNode->left);
+	DisCharge(pNode->right);
+
+	if (pNode->BothLRareNull())
+	{
+		if (nullptr == pNode->parent)
+		{
+			delete pNode;
+			pNode = nullptr;
+			return;
+		}
+		if (pNode == pNode->parent->right)
+		{
+			pNode->parent->right = nullptr;
+		}
+		else
+		{
+			pNode->parent->left = nullptr;
+		}
+		delete pNode;
+		pNode = nullptr;
+		return;
+	}
+}
+
+MyBST::~MyBST()
+{
+	DisCharge(root);
 }
 #endif
 #endif // !_BSTREE_HPP_

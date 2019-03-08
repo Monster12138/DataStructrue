@@ -2,15 +2,20 @@
 //#include "LinkList\LinkList.hpp"
 //#include "Stack\Stack.hpp"
 //#include "Queue\Queue.hpp"
-#include "BSTree\BSTree.hpp"
-#include <my_check_mem.h>
+//#include "BSTree\BSTree.hpp"
+//#include <my_check_mem.h>
+#include "AVLTree\AVLTree.hpp"
 #include <iostream>
 using namespace std;
 
 int main()
 {
-	atexit(memCheck);
+	//atexit(memCheck);
 
+
+
+	//¶þ²æËÑË÷Ê÷²âÊÔ
+#if 0
 	MyBST bstree;
 	bstree.InsertNode(5);
 	bstree.InsertNode(3);
@@ -21,9 +26,17 @@ int main()
 	bstree.InsertNode(10);
 	bstree.InsertNode(9);
 
-	bstree.DeleteNode(8);
+	BSTNode* n1 = bstree.GetSuccessor(3);
+	cout << n1->value << endl;
+	n1 = bstree.GetSuccessor(4);
+	cout << n1->value << endl;
 
-
+	n1 = bstree.GetPredecessor(10);
+	cout << n1->value << endl;
+	n1 = bstree.GetPredecessor(8);
+	cout << n1->value << endl;
+#endif
+	//********************************
 	//¶ÓÁÐ²âÊÔ
 #if 0
 	Queue q1;
