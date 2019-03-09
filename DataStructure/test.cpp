@@ -12,6 +12,14 @@ int main()
 {
 	//atexit(memCheck);
 
+	AVLTree avlt;
+	avlt.Insert(5);
+	avlt.Insert(3);
+	avlt.Insert(7);
+	avlt.Insert(6);
+
+	avlt.DeleteNode(3);
+
 
 
 	//¶ş²æËÑË÷Ê÷²âÊÔ
