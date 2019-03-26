@@ -5,6 +5,7 @@
 //#include "BSTree\BSTree.hpp"
 //#include <my_check_mem.h>
 #include "AVLTree\AVLTree.hpp"
+//#include "Heap.hpp"
 #include <iostream>
 using namespace std;
 
@@ -13,12 +14,12 @@ int main()
 	//atexit(memCheck);
 
 	AVLTree avlt;
-	avlt.Insert(5);
-	avlt.Insert(3);
-	avlt.Insert(7);
-	avlt.Insert(6);
-
-	avlt.DeleteNode(3);
+	avlt.Insert(40);
+	avlt.Insert(30);
+	avlt.Insert(50);
+	avlt.Insert(45);
+	avlt.Insert(60);
+	avlt.Insert(44);
 
 
 

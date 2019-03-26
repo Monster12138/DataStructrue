@@ -8,8 +8,14 @@ struct AVLTNode
 	int value;
 	AVLTNode *left;
 	AVLTNode *right;
+	AVLTNode *parent;
+	int bf;
 
-	AVLTNode(int v):value(v), left(nullptr), right(nullptr) {}
+	AVLTNode(int v):value(v), 
+		left(nullptr), right(nullptr),
+		parent(nullptr), bf(0)
+	{}
+
 	inline int GetHeight()
 	{
 		if (nullptr == this)return -1;
@@ -48,21 +54,32 @@ AVLTNode* AVLTree::SingleRotateRR(AVLTNode *pn)
 {
 	assert(nullptr != pn);
 
-	AVLTNode *pr = pn->right;
-	pn->right = pr->left;
-	pr->left = pn;
+	AVLTNode *cur = pn->right;
 
-	return pr;
+	pn->right = cur->left;
+	if(cur->left)cur->left->parent = pn;
+
+	cur->left = pn;
+	cur->parent = pn->parent;
+	pn->parent = cur;
+
+	return cur;
 }
 
 AVLTNode* AVLTree::SingleRotateLL(AVLTNode *pn)
 {
 	assert(nullptr != pn);
-	AVLTNode *pl = pn->left;
-	pn->left = pl->right;
-	pl->right = pn;
+	
+	AVLTNode *cur = pn->left;
 
-	return pl;
+	pn->left = cur->right;
+	if (cur->right)cur->right->parent = pn;
+
+	cur->right = pn;
+	cur->parent = pn->parent;
+	pn->parent = cur;
+
+	return cur;
 }
 
 AVLTNode* AVLTree::DoubleRotateLR(AVLTNode *pn)
@@ -88,6 +105,8 @@ AVLTNode* AVLTree::Insert(AVLTNode* pn)
 			if (nullptr == cur->right)
 			{
 				cur->right = pn;
+				pn->parent = cur;
+				++cur->bf;
 				break;
 			}
 			else
@@ -98,6 +117,8 @@ AVLTNode* AVLTree::Insert(AVLTNode* pn)
 			if (nullptr == cur->left)
 			{
 				cur->left = pn;
+				pn->parent = cur;
+				--cur->bf;
 				break;
 			}
 			else
@@ -113,21 +134,47 @@ AVLTNode* AVLTree::Insert(AVLTNode* pn)
 		return root;
 	}
 
-	if (abs(root->left->GetHeight() - root->right->GetHeight()) > 1)
+	if (0 == cur->bf)return root;
+
+	AVLTNode *parent = cur->parent;
+	while ( cur != root && cur->bf != 0)
 	{
-		if (root->value < cur->value)
+		parent = cur->parent;
+		if (cur == parent->left)--parent->bf;
+		else ++parent->bf;
+			
+		if (abs(parent->bf) > 1)break;
+		cur = parent;
+		if (parent == root)return root;
+	}
+
+	if (parent && abs(parent->bf) > 1)
+	{
+		if (cur == parent->left)
 		{
-			if (cur->value < pn->value)
-				root = SingleRotateRR(root);
+			if (pn->value < cur->value)
+			{
+				if (parent == root)root = SingleRotateLL(parent);
+				else parent->parent = SingleRotateLL(parent);
+			}
 			else
-				root = DoubleRotateRL(root);
+			{
+				if (parent == root)root = DoubleRotateLR(parent);
+				else parent->parent = DoubleRotateLR(parent);
+			}
 		}
 		else
 		{
-			if (cur->value > pn->value)
-				root = SingleRotateLL(root);
+			if (pn->value > cur->value)
+			{
+				if (parent == root)root = SingleRotateRR(parent);
+				else parent->parent = SingleRotateRR(parent);
+			}
 			else
-				root = DoubleRotateLR(root);
+			{
+				if (parent == root)root = DoubleRotateRL(parent);
+				else parent->parent = DoubleRotateRL(parent);
+			}
 		}
 	}
 	return root;
@@ -136,9 +183,8 @@ AVLTNode* AVLTree::Insert(AVLTNode* pn)
 AVLTNode* AVLTree::Insert(int v)
 {
 	AVLTNode *newNode = new AVLTNode(v);
-	Insert(newNode);
-
-	return nullptr;
+	
+	return Insert(newNode);;
 }
 
 void AVLTree::DisCharge(AVLTNode *&pNode)
